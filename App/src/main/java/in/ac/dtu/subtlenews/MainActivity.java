@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
         switch (id){
             case R.id.action_refresh:
-                new UpdateNews().execute();
+                new UpdateNews(MainActivity.this).execute();
                 return true;
             case R.id.action_settings:
                 return true;
