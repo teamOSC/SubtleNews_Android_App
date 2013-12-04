@@ -1,12 +1,20 @@
 package in.ac.dtu.subtlenews;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.InputStream;
 
 /**
  * Created by omerjerk on 2/12/13.
@@ -18,6 +26,7 @@ public class MainFragment extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final String TAG = "MAIN_FRAGMENT";
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -40,6 +49,9 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         TextView textView = (TextView) rootView.findViewById(R.id.section_label);
         textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+
+        new ReadFromJSON().execute();
+
         return rootView;
     }
 
@@ -48,5 +60,25 @@ public class MainFragment extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    public class ReadFromJSON extends AsyncTask <Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... v) {
+
+            try {
+                //Log.d(TAG, getActivity().getFilesDir() + "data.json");
+                File cacheFile = new File(getActivity().getFilesDir() , "data.json");
+
+                BufferedReader br = new BufferedReader(new FileReader(cacheFile));
+                String jsonString = br.readLine();
+                Log.d(TAG, jsonString);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 }

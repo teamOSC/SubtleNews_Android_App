@@ -2,7 +2,6 @@ package in.ac.dtu.subtlenews;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
