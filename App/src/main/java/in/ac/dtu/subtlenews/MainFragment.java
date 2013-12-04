@@ -1,7 +1,6 @@
 package in.ac.dtu.subtlenews;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,10 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * Created by omerjerk on 2/12/13.
@@ -27,6 +29,8 @@ public class MainFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String TAG = "MAIN_FRAGMENT";
+
+    private int sNumber ;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -52,33 +56,61 @@ public class MainFragment extends Fragment {
 
         new ReadFromJSON().execute();
 
+        sNumber = getArguments().getInt(ARG_SECTION_NUMBER);
+
         return rootView;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
+        ((MainActivity) activity).onSectionAttached(sNumber);
     }
 
-    public class ReadFromJSON extends AsyncTask <Void, Void, String> {
+    private class ReadFromJSON extends AsyncTask <Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... v) {
 
+            String jsonString = null;
             try {
                 //Log.d(TAG, getActivity().getFilesDir() + "data.json");
                 File cacheFile = new File(getActivity().getFilesDir() , "data.json");
 
                 BufferedReader br = new BufferedReader(new FileReader(cacheFile));
-                String jsonString = br.readLine();
-                Log.d(TAG, jsonString);
+                jsonString = br.readLine();
+
             } catch (Exception e){
                 e.printStackTrace();
             }
 
-            return null;
+            return jsonString;
+        }
+
+        protected void onPostExecute(String jsonString){
+
+            ArrayList<JSONObject> jsonList = new ArrayList<JSONObject>();
+
+            Log.d(TAG, jsonString);
+            try {
+                JSONArray jsonArray = new JSONArray(jsonString);
+
+                for(int i = 0; i < jsonArray.length(); ++i){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+
+                    if(obj.getString("category").equals(Utils.categoryMap[sNumber - 1])){
+                        jsonList.add(obj);
+                    }
+
+                }
+
+                for(JSONObject lol : jsonList){
+                    Log.d(TAG, lol.getString("category"));
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
     }
 }
