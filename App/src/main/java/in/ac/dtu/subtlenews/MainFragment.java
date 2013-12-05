@@ -91,7 +91,7 @@ public class MainFragment extends Fragment {
 
             ArrayList<JSONObject> jsonList = new ArrayList<JSONObject>();
 
-            Log.d(TAG, jsonString);
+            Log.d(TAG, "jsonString" + jsonString);
             try {
                 JSONArray jsonArray = new JSONArray(jsonString);
 
