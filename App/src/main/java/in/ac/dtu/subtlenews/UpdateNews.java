@@ -31,7 +31,7 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
 
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse response = httpclient.execute(new HttpGet("http://subtlenews.appspot.com/.json"));
+            HttpResponse response = httpclient.execute(new HttpGet("http://dl.dropboxusercontent.com/u/84253825/summary.txt"));
             HttpEntity entity = response.getEntity();
             String result = EntityUtils.toString(entity);
             return result;
