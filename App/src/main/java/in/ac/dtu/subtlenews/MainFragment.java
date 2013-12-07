@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -67,12 +68,25 @@ public class MainFragment extends Fragment {
         ((MainActivity) activity).onSectionAttached(sNumber);
     }
 
-    private class ReadFromJSON extends AsyncTask <Void, Void, String> {
+    private static final String TAG_CATEGORY = "category";
+    private static final String TAG_TITLE = "title";
+    private static final String TAG_SOURCE = "source";
+    private static final String TAG_SUMMARY = "summary";
+    private static final String TAG_LINK = "link";
+    private static final String TAG_DATE = "date";
+
+
+
+    private class ReadFromJSON extends AsyncTask<Void, Void, String[][]> {
 
         @Override
-        protected String doInBackground(Void... v) {
+        protected String[][] doInBackground(Void... v) {
 
             String jsonString = null;
+            JSONObject newsObj = null;
+            String newsArray[][] = null;
+            JSONArray news = null;
+
             try {
                 //Log.d(TAG, getActivity().getFilesDir() + "data.json");
                 File cacheFile = new File(getActivity().getFilesDir() , "data.json");
@@ -84,8 +98,42 @@ public class MainFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            return jsonString;
+            try {
+                newsObj = new JSONObject(jsonString);
+            } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data " + e.toString());
+            }
+
+            try {
+                news = newsObj.getJSONArray("JSON");
+                for (int i = 1; i < news.length(); i++) {
+                    JSONObject n = news.getJSONObject(i);
+                    newsArray[i][0] = n.getString(TAG_CATEGORY);
+                    newsArray[i][1] = n.getString(TAG_DATE);
+                    newsArray[i][2] = n.getString(TAG_TITLE);
+                    newsArray[i][3] = n.getString(TAG_SOURCE);
+                    newsArray[i][4] = n.getString(TAG_SUMMARY);
+                    newsArray[i][5] = n.getString(TAG_LINK);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+            return newsArray;
         }
+
+        /* TODO:
+
+            Inside the post execute method we need to populate the view which consists of
+            news items.
+            For now we have got a 2d array of strings, with newsArray[3][x] means we are
+            speaking of 3rd news item.
+            Furthen inside each news item, the newsArray[3][1] is category and then
+            newsArray[3][2] is date and so on.
+         */
 
         protected void onPostExecute(String jsonString){
 
