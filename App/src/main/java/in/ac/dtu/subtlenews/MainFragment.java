@@ -82,8 +82,8 @@ public class MainFragment extends Fragment {
         @Override
         protected String[][] doInBackground(Void... v) {
 
-            String jsonString = null;
-            JSONObject newsObj = null;
+            String jsonString = "";
+            JSONObject newsObj = new JSONObject();
             String newsArray[][] = null;
             JSONArray news = null;
 
