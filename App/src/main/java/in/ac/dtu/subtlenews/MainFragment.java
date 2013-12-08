@@ -108,8 +108,8 @@ public class MainFragment extends Fragment {
                 news = newsObj.getJSONArray("JSON");
                 for (int i = 1; i < news.length(); i++) {
                     JSONObject n = news.getJSONObject(i);
-                    newsArray[i][0] = n.getString(TAG_CATEGORY);
-                    newsArray[i][1] = n.getString(TAG_DATE);
+                    newsArray[i][0] = n.getString(TAG_CATEGORY); //Log.d("SUBTLENEWS_TEST", newsArray[i][0]);
+                    newsArray[i][1] = n.getString(TAG_DATE); //Log.d("SUBTLENEWS_TEST", newsArray[i][1]);
                     newsArray[i][2] = n.getString(TAG_TITLE);
                     newsArray[i][3] = n.getString(TAG_SOURCE);
                     newsArray[i][4] = n.getString(TAG_SUMMARY);
