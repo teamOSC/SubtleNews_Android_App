@@ -1,7 +1,9 @@
 package in.ac.dtu.subtlenews;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -75,6 +78,7 @@ public class MainFragment extends Fragment {
         ((MainActivity) activity).onSectionAttached(sNumber);
     }
 
+    private static final String NEWSFEED_NAME = "summary";
     private static final String TAG_CATEGORY = "category";
     private static final String TAG_TITLE = "title";
     private static final String TAG_SOURCE = "source";
@@ -107,7 +111,7 @@ public class MainFragment extends Fragment {
             Log.d(TAG, "jsonString" + jsonString);
             try {
                 JSONObject mJSONObject = new JSONObject(jsonString);
-                JSONArray jsonArray = mJSONObject.getJSONArray(TAG_SUMMARY);
+                JSONArray jsonArray = mJSONObject.getJSONArray(NEWSFEED_NAME);
 
                 for(int i = 1; i < jsonArray.length(); ++i){
                     JSONObject obj = jsonArray.getJSONObject(i);
@@ -137,8 +141,31 @@ public class MainFragment extends Fragment {
 
         protected void onPostExecute(ArrayList<JSONObject> mArrayList){
 
+            final ArrayList<JSONObject> fArrayList = mArrayList;
+
             ListView mLisView = (ListView) rootView.findViewById(R.id.list_news);
             mLisView.setAdapter(new ListViewLoader(mArrayList));
+            mLisView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    try {
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle(fArrayList.get(i).getString(TAG_TITLE))
+                                .setMessage(fArrayList.get(i).getString(TAG_SUMMARY))
+                                .setPositiveButton("Source", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        /* TODO :
+
+                                            Take user to source of news
+                                         */
+                                    }
+                                })
+                                .show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
         }
     }
