@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="drawer_background">#303030</color>
+    <color name="drawer_list_divider">#404040</color>
+</resources>
