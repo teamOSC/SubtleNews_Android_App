@@ -3,6 +3,7 @@ package in.ac.dtu.subtlenews;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -31,7 +32,7 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
 
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse response = httpclient.execute(new HttpGet("http://dl.dropboxusercontent.com/u/84253825/summary.txt"));
+            HttpResponse response = httpclient.execute(new HttpGet("http://162.243.238.19/summary.txt"));
             HttpEntity entity = response.getEntity();
             String result = EntityUtils.toString(entity);
             return result;
@@ -57,8 +58,11 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
             bw = new BufferedWriter(fw);
             bw.write(r);
 
+            Toast.makeText(context, "News refreshed!", Toast.LENGTH_SHORT).show();
+
         } catch (Exception e){
             e.printStackTrace();
+            Toast.makeText(context, "Sorry! Something went wrong.", Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 bw.close();

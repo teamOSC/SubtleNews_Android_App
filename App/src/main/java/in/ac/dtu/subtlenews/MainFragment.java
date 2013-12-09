@@ -1,6 +1,7 @@
 package in.ac.dtu.subtlenews;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -18,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by omerjerk on 2/12/13.
@@ -32,6 +37,8 @@ public class MainFragment extends Fragment {
     private static final String TAG = "MAIN_FRAGMENT";
 
     private int sNumber ;
+
+    View rootView;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -51,9 +58,9 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+        rootView = inflater.inflate(R.layout.fragment_main, container, false);
+//        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+//        textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 
         new ReadFromJSON().execute();
 
@@ -77,15 +84,12 @@ public class MainFragment extends Fragment {
 
 
 
-    private class ReadFromJSON extends AsyncTask<Void, Void, String[][]> {
+    private class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<JSONObject>> {
 
         @Override
-        protected String[][] doInBackground(Void... v) {
+        protected ArrayList<JSONObject> doInBackground(Void... v) {
 
             String jsonString = "";
-            JSONObject newsObj = new JSONObject();
-            String newsArray[][] = null;
-            JSONArray news = null;
 
             try {
                 //Log.d(TAG, getActivity().getFilesDir() + "data.json");
@@ -98,67 +102,94 @@ public class MainFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            try {
-                newsObj = new JSONObject(jsonString);
-            } catch (JSONException e) {
-                Log.e("JSON Parser", "Error parsing data " + e.toString());
-            }
-
-            try {
-                news = newsObj.getJSONArray("JSON");
-                for (int i = 1; i < news.length(); i++) {
-                    JSONObject n = news.getJSONObject(i);
-                    newsArray[i][0] = n.getString(TAG_CATEGORY); //Log.d("SUBTLENEWS_TEST", newsArray[i][0]);
-                    newsArray[i][1] = n.getString(TAG_DATE); //Log.d("SUBTLENEWS_TEST", newsArray[i][1]);
-                    newsArray[i][2] = n.getString(TAG_TITLE);
-                    newsArray[i][3] = n.getString(TAG_SOURCE);
-                    newsArray[i][4] = n.getString(TAG_SUMMARY);
-                    newsArray[i][5] = n.getString(TAG_LINK);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-
-
-            return newsArray;
-        }
-
-        /* TODO:
-
-            Inside the post execute method we need to populate the view which consists of
-            news items.
-            For now we have got a 2d array of strings, with newsArray[3][x] means we are
-            speaking of 3rd news item.
-            Furthen inside each news item, the newsArray[3][1] is category and then
-            newsArray[3][2] is date and so on.
-         */
-
-        protected void onPostExecute(String jsonString){
-
-            ArrayList<JSONObject> jsonList = new ArrayList<JSONObject>();
+            ArrayList<JSONObject> selectedCategoryList = new ArrayList<JSONObject>();
 
             Log.d(TAG, "jsonString" + jsonString);
             try {
                 JSONArray jsonArray = new JSONArray(jsonString);
 
-                for(int i = 0; i < jsonArray.length(); ++i){
+                for(int i = 1; i < jsonArray.length(); ++i){
                     JSONObject obj = jsonArray.getJSONObject(i);
 
                     if(obj.getString("category").equals(Utils.categoryMap[sNumber - 1])){
-                        jsonList.add(obj);
+                        selectedCategoryList.add(obj);
                     }
 
                 }
 
-                for(JSONObject lol : jsonList){
+                for(JSONObject lol : selectedCategoryList){
                     Log.d(TAG, lol.getString("category"));
                 }
             } catch (Exception e){
                 e.printStackTrace();
             }
 
+            return selectedCategoryList;
         }
+
+        /* TODO:
+
+            Make the listview better.
+            Set onItemClickListener on the listview which will display the summary of the news.
+         */
+
+        protected void onPostExecute(ArrayList<JSONObject> mArrayList){
+
+            ListView mLisView = (ListView) rootView.findViewById(R.id.list_news);
+            mLisView.setAdapter(new ListViewLoader(mArrayList));
+
+        }
+    }
+
+    private class ListViewLoader extends BaseAdapter {
+
+        private ArrayList<JSONObject> selectedCategoryList;
+
+        public ListViewLoader( ArrayList<JSONObject> selectedCategoryList ){
+
+            this.selectedCategoryList = selectedCategoryList;
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            //return 0;
+            return selectedCategoryList.size();
+        }
+
+        @Override
+        public Object getItem(int arg0) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public long getItemId(int arg0) {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View rowView;
+
+            rowView = new View(getActivity());
+
+            // get layout from mobile.xml
+            rowView = inflater.inflate(R.layout.row_list, null);
+
+            // set value into textview
+            TextView textView = (TextView) rowView.findViewById(R.id.title_news);
+            try {
+                textView.setText(selectedCategoryList.get(position).getString(TAG_TITLE));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return rowView;
+        }
+
     }
 }
