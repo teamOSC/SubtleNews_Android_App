@@ -106,7 +106,8 @@ public class MainFragment extends Fragment {
 
             Log.d(TAG, "jsonString" + jsonString);
             try {
-                JSONArray jsonArray = new JSONArray(jsonString);
+                JSONObject mJSONObject = new JSONObject(jsonString);
+                JSONArray jsonArray = mJSONObject.getJSONArray(TAG_SUMMARY);
 
                 for(int i = 1; i < jsonArray.length(); ++i){
                     JSONObject obj = jsonArray.getJSONObject(i);
@@ -117,6 +118,7 @@ public class MainFragment extends Fragment {
 
                 }
 
+                //for debugging only
                 for(JSONObject lol : selectedCategoryList){
                     Log.d(TAG, lol.getString("category"));
                 }
