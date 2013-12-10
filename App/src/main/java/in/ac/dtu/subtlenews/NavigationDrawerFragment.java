@@ -105,7 +105,10 @@ public class NavigationDrawerFragment extends Fragment {
                         "Sports",
                         "Entertainment",
                         "Business",
-                        "Technology"
+                        "Technology",
+                        "World",
+                        "Science",
+                        "Health"
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;

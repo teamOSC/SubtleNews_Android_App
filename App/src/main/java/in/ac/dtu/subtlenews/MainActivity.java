@@ -60,6 +60,15 @@ public class MainActivity extends ActionBarActivity
             case 4:
                 mTitle = "Technology";
                 break;
+            case 5:
+                mTitle = "World";
+                break;
+            case 6:
+                mTitle = "Science";
+                break;
+            case 7:
+                mTitle = "Health";
+                break;
         }
     }
 

@@ -26,5 +26,4 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:name="in.ac.dtu.subtlenews.NavigationDrawerFragment" />
-
 </android.support.v4.widget.DrawerLayout>
