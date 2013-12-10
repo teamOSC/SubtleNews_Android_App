@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -147,7 +150,7 @@ public class MainFragment extends Fragment {
             mLisView.setAdapter(new ListViewLoader(mArrayList));
             mLisView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
                     try {
                         new AlertDialog.Builder(getActivity())
                                 .setTitle(fArrayList.get(i).getString(TAG_TITLE))
@@ -155,9 +158,18 @@ public class MainFragment extends Fragment {
                                 .setPositiveButton("Source", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         /* TODO :
-
-                                            Take user to source of news
+                                            USE webview to implement in-app browser instead of this
                                          */
+                                        String url = "http://www.google.com";
+                                        try {
+                                            url = "http://www.instapaper.com/text?u=" + fArrayList.get(i).getString(TAG_LINK);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                        startActivity(browserIntent);
+
+
                                     }
                                 })
                                 .show();
