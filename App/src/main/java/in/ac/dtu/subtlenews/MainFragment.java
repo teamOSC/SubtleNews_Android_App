@@ -89,9 +89,13 @@ public class MainFragment extends Fragment {
     private static final String TAG_LINK = "link";
     private static final String TAG_DATE = "date";
 
+    public  void updateView(){
+        new ReadFromJSON().execute();
+    }
 
 
-    private class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<JSONObject>> {
+
+    public class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<JSONObject>> {
 
         @Override
         protected ArrayList<JSONObject> doInBackground(Void... v) {

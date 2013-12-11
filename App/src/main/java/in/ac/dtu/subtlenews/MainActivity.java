@@ -105,18 +105,13 @@ public class MainActivity extends ActionBarActivity
         switch (id){
             case R.id.action_refresh:
                 new UpdateNews(MainActivity.this).execute();
+                MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+                mainFragment.updateView();
                 return true;
             case R.id.action_settings:
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
     }
 
 }
