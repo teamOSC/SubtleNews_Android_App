@@ -101,15 +101,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
-                new String[]{
-                        "Sports",
-                        "Entertainment",
-                        "Business",
-                        "Technology",
-                        "World",
-                        "Science",
-                        "Health"
-                }));
+                Utils.categoryMap));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }

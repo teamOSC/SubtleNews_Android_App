@@ -6,6 +6,6 @@ package in.ac.dtu.subtlenews;
 
 public class Utils {
 
-    public static String[] categoryMap = {"Sports", "Entertainment", "Business", "Technology" , "World" , "Science" , "Health"};
+    public static String[] categoryMap = {"India", "World", "Entertainment" , "Technology", "Business","Science" , "Sports", "Health"};
 
 }

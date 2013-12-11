@@ -68,7 +68,7 @@ public class MainFragment extends Fragment {
 //        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 //        textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 
-        new ReadFromJSON().execute();
+        updateView();
 
         sNumber = getArguments().getInt(ARG_SECTION_NUMBER);
 
@@ -88,6 +88,10 @@ public class MainFragment extends Fragment {
     private static final String TAG_SUMMARY = "summary";
     private static final String TAG_LINK = "link";
     private static final String TAG_DATE = "date";
+
+    public  void updateView(){
+        new ReadFromJSON().execute();
+    }
 
 
 

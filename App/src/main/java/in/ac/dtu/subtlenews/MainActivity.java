@@ -49,24 +49,27 @@ public class MainActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = "Sports";
+                mTitle = "India";
                 break;
             case 2:
-                mTitle = "Entertainment";
+                mTitle = "World";
                 break;
             case 3:
-                mTitle = "Business";
+                mTitle = "Entertainment";
                 break;
             case 4:
                 mTitle = "Technology";
                 break;
             case 5:
-                mTitle = "World";
+                mTitle = "Business";
                 break;
             case 6:
                 mTitle = "Science";
                 break;
             case 7:
+                mTitle = "Sports";
+                break;
+            case 8:
                 mTitle = "Health";
                 break;
         }
@@ -102,18 +105,13 @@ public class MainActivity extends ActionBarActivity
         switch (id){
             case R.id.action_refresh:
                 new UpdateNews(MainActivity.this).execute();
+                MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+                mainFragment.updateView();
                 return true;
             case R.id.action_settings:
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
     }
 
 }
