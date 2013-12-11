@@ -68,7 +68,7 @@ public class MainFragment extends Fragment {
 //        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 //        textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 
-        new ReadFromJSON().execute();
+        updateView();
 
         sNumber = getArguments().getInt(ARG_SECTION_NUMBER);
 
@@ -95,7 +95,7 @@ public class MainFragment extends Fragment {
 
 
 
-    public class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<JSONObject>> {
+    private class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<JSONObject>> {
 
         @Override
         protected ArrayList<JSONObject> doInBackground(Void... v) {
