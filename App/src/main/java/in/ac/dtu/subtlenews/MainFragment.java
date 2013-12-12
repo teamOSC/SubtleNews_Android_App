@@ -171,15 +171,21 @@ public class MainFragment extends Fragment {
                                     public void onClick(DialogInterface dialog, int id) {
                                         /* TODO :
                                             USE webview to implement in-app browser instead of this
-                                         */
+
+
+                                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                        startActivity(browserIntent);
+                                        */
                                         String url = "http://www.google.com";
                                         try {
                                             url = "http://www.instapaper.com/text?u=" + fArrayList.get(i).getString(TAG_LINK);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-                                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                                        startActivity(browserIntent);
+
+                                        Intent instapaper = new Intent(getActivity(), InstapaperViewer.class);
+                                        instapaper.putExtra("URL", url);
+                                        startActivity(instapaper);
 
 
                                     }
