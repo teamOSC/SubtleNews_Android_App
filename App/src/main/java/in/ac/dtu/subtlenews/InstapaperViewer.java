@@ -12,6 +12,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.webkit.WebView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -20,7 +23,7 @@ import android.support.v4.app.NavUtils;
  * @see SystemUiHider
  */
 public class InstapaperViewer extends Activity {
-
+    public String summaryUrl = "http://google.com";
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -57,8 +60,14 @@ public class InstapaperViewer extends Activity {
         setContentView(R.layout.activity_instapaper_viewer);
         setupActionBar();
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            summaryUrl = extras.getString("URL");
+        }
+        final WebView instapaperView = (WebView) findViewById(R.id.instapaper_viewer);
+
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
-        final View contentView = findViewById(R.id.fullscreen_content);
+        final View contentView = findViewById(R.id.instapaper_viewer);
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
@@ -99,6 +108,15 @@ public class InstapaperViewer extends Activity {
                             // Schedule a hide().
                             delayedHide(AUTO_HIDE_DELAY_MILLIS);
                         }
+
+                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)instapaperView.getLayoutParams();
+                        if (visible) {
+                            params.setMargins(0, (int)(mControlsHeight*1.5), 0, 0); //substitute parameters for left, top, right, bottom
+                        } else {
+                            params.setMargins(0, 0, 0, 0);
+                        }
+                        instapaperView.setLayoutParams(params);
+
                     }
                 });
 
@@ -118,6 +136,9 @@ public class InstapaperViewer extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.summary_back_button).setOnTouchListener(mDelayHideTouchListener);
+
+
+        instapaperView.loadUrl(summaryUrl);
     }
 
     @Override
