@@ -226,9 +226,11 @@ public class MainFragment extends Fragment {
             rowView = inflater.inflate(R.layout.row_list, null);
 
             // set value into textview
-            TextView textView = (TextView) rowView.findViewById(R.id.title_news);
+            TextView newsTitle = (TextView) rowView.findViewById(R.id.title_news);
+            TextView sourceName = (TextView) rowView.findViewById(R.id.source_news);
             try {
-                textView.setText(selectedCategoryList.get(position).getString(TAG_TITLE));
+                newsTitle.setText(selectedCategoryList.get(position).getString(TAG_TITLE));
+                sourceName.setText(selectedCategoryList.get(position).getString(TAG_SOURCE));
             } catch (Exception e){
                 e.printStackTrace();
             }
