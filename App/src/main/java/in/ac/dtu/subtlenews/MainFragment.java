@@ -129,7 +129,7 @@ public class MainFragment extends Fragment {
                 for(int i = 1; i < jsonArray.length(); ++i){
                     JSONObject obj = jsonArray.getJSONObject(i);
 
-                    if(obj.getString("category").equals(Utils.categoryMap[sNumber - 1])){
+                    if(obj.getString(TAG_CATEGORY).equals(Utils.categoryMap[sNumber - 1])){
                         selectedCategoryList.add(obj);
                         urlArray.add(obj.getString(TAG_LINK));
                     }
@@ -259,11 +259,15 @@ public class MainFragment extends Fragment {
 
             TextView newsTitle = (TextView) rowView.findViewById(R.id.title_news);
             TextView sourceName = (TextView) rowView.findViewById(R.id.source_news);
+            TextView newsDate = (TextView) rowView.findViewById(R.id.date_news);
             sourceName.setTextColor(Color.GRAY);
             sourceName.setTextSize(10);
+            newsDate.setTextColor(Color.GRAY);
+            newsDate.setTextSize(10);
             try {
                 newsTitle.setText(selectedCategoryList.get(position).getString(TAG_TITLE));
                 sourceName.setText(selectedCategoryList.get(position).getString(TAG_SOURCE));
+                newsDate.setText(selectedCategoryList.get(position).getString(TAG_DATE));
             } catch (Exception e){
                 e.printStackTrace();
             }
