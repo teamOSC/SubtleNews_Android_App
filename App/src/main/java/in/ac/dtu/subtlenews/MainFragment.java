@@ -1,15 +1,18 @@
 package in.ac.dtu.subtlenews;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,8 +156,14 @@ public class MainFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
                     try {
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle(fArrayList.get(i).getString(TAG_TITLE))
+                        TextView summaryTitle = new TextView(getActivity());
+                        summaryTitle.setText(fArrayList.get(i).getString(TAG_TITLE));
+                        summaryTitle.setTextSize(16);
+                        summaryTitle.setPadding(8, 8, 8, 8);
+                        summaryTitle.setGravity(Gravity.CENTER);
+                        summaryTitle.setTextColor(Color.GRAY);
+                        AlertDialog summaryBox = new AlertDialog.Builder(getActivity())
+                                .setCustomTitle(summaryTitle)
                                 .setMessage(fArrayList.get(i).getString(TAG_SUMMARY))
                                 .setPositiveButton("Source", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -173,6 +183,12 @@ public class MainFragment extends Fragment {
                                     }
                                 })
                                 .show();
+                        TextView summaryText = (TextView) summaryBox.findViewById(android.R.id.message);
+                        summaryText.setTextSize(12);
+                        if (android.os.Build.VERSION.SDK_INT > 11) {
+                            // Let Android 3.0 above users select the news text
+                            summaryText.setTextIsSelectable(true);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -224,6 +240,8 @@ public class MainFragment extends Fragment {
             // set value into textview
             TextView newsTitle = (TextView) rowView.findViewById(R.id.title_news);
             TextView sourceName = (TextView) rowView.findViewById(R.id.source_news);
+            sourceName.setTextColor(Color.GRAY);
+            sourceName.setTextSize(10);
             try {
                 newsTitle.setText(selectedCategoryList.get(position).getString(TAG_TITLE));
                 sourceName.setText(selectedCategoryList.get(position).getString(TAG_SOURCE));
