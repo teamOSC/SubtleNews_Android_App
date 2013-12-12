@@ -247,16 +247,16 @@ public class MainFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View rowView;
 
-            rowView = new View(getActivity());
+            if(convertView == null){
+                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowView = inflater.inflate(R.layout.row_list, null);
+            } else {
+                rowView = convertView;
+            }
 
-            // get layout from mobile.xml
-            rowView = inflater.inflate(R.layout.row_list, null);
-
-            // set value into textview
             TextView newsTitle = (TextView) rowView.findViewById(R.id.title_news);
             TextView sourceName = (TextView) rowView.findViewById(R.id.source_news);
             sourceName.setTextColor(Color.GRAY);
