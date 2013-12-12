@@ -48,6 +48,7 @@ public class MainFragment extends Fragment {
     private static final String TAG = "MAIN_FRAGMENT";
 
     private int sNumber ;
+    public ArrayList<String> urlArray = new ArrayList<String>();
 
     View rootView;
 
@@ -130,6 +131,7 @@ public class MainFragment extends Fragment {
 
                     if(obj.getString("category").equals(Utils.categoryMap[sNumber - 1])){
                         selectedCategoryList.add(obj);
+                        urlArray.add(obj.getString(TAG_LINK));
                     }
 
                 }
@@ -169,22 +171,12 @@ public class MainFragment extends Fragment {
                                 .setMessage(fArrayList.get(i).getString(TAG_SUMMARY))
                                 .setPositiveButton("Instapaper", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        /* TODO :
-                                            USE webview to implement in-app browser instead of this
 
 
-                                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                                        startActivity(browserIntent);
-                                        */
-                                        String url = "http://www.google.com";
-                                        try {
-                                            url = "http://www.instapaper.com/text?u=" + fArrayList.get(i).getString(TAG_LINK);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
 
                                         Intent instapaper = new Intent(getActivity(), InstapaperViewer.class);
-                                        instapaper.putExtra("URL", url);
+                                        instapaper.putExtra("URLID", i);
+                                        instapaper.putExtra("URLList", urlArray);
                                         startActivity(instapaper);
 
 

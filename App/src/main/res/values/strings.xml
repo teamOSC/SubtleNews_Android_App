@@ -14,5 +14,7 @@
     <string name="title_activity_instapaper_viewer">InstapaperViewer</string>
     <string name="summary_back_button">Back</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="summary_next_button">Next</string>
+    <string name="summary_prev_button">Prev</string>
 
 </resources>

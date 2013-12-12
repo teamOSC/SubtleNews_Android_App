@@ -29,12 +29,18 @@
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button android:id="@+id/summary_back_button"
+            <Button android:id="@+id/summary_prev_button"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/summary_back_button" />
+                android:text="@string/summary_prev_button" />
+            <Button android:id="@+id/summary_next_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/summary_next_button" />
 
         </LinearLayout>
     </FrameLayout>

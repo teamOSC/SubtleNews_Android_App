@@ -4,6 +4,7 @@ import in.ac.dtu.subtlenews.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,8 +14,14 @@ import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -24,6 +31,9 @@ import android.widget.LinearLayout;
  */
 public class InstapaperViewer extends Activity {
     public String summaryUrl = "http://google.com";
+    public Integer urlId = 0;
+    public ArrayList<String> urlList;
+
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -62,12 +72,17 @@ public class InstapaperViewer extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            summaryUrl = extras.getString("URL");
+            urlId = extras.getInt("URLID");
+            urlList = extras.getStringArrayList("URLList");
+
         }
         final WebView instapaperView = (WebView) findViewById(R.id.instapaper_viewer);
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.instapaper_viewer);
+
+        final Button prevButton = (Button) findViewById(R.id.summary_prev_button);
+        final Button nextButton = (Button) findViewById(R.id.summary_next_button);
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
@@ -135,10 +150,38 @@ public class InstapaperViewer extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.summary_back_button).setOnTouchListener(mDelayHideTouchListener);
+        prevButton.setOnTouchListener(mDelayHideTouchListener);
+        nextButton.setOnTouchListener(mDelayHideTouchListener);
 
-
+        try {
+            summaryUrl = "http://www.instapaper.com/text?u=" + urlList.get(urlId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         instapaperView.loadUrl(summaryUrl);
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    summaryUrl = "http://www.instapaper.com/text?u=" + urlList.get(--urlId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                instapaperView.loadUrl(summaryUrl);
+            }
+        });
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    summaryUrl = "http://www.instapaper.com/text?u=" + urlList.get(++urlId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                instapaperView.loadUrl(summaryUrl);
+            }
+        });
+
     }
 
     @Override
