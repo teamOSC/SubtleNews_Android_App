@@ -1,5 +1,6 @@
 package in.ac.dtu.subtlenews;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -153,6 +154,7 @@ public class MainFragment extends Fragment {
             ListView mLisView = (ListView) rootView.findViewById(R.id.list_news);
             mLisView.setAdapter(new ListViewLoader(mArrayList));
             mLisView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @SuppressLint("NewApi")
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
                     try {
@@ -165,7 +167,7 @@ public class MainFragment extends Fragment {
                         AlertDialog summaryBox = new AlertDialog.Builder(getActivity())
                                 .setCustomTitle(summaryTitle)
                                 .setMessage(fArrayList.get(i).getString(TAG_SUMMARY))
-                                .setPositiveButton("Source", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Instapaper", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         /* TODO :
                                             USE webview to implement in-app browser instead of this
@@ -182,13 +184,32 @@ public class MainFragment extends Fragment {
 
                                     }
                                 })
+                                .setNegativeButton("Source", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        /* TODO :
+                                            USE webview to implement in-app browser instead of this
+                                         */
+                                        String url = "http://www.google.com";
+                                        try {
+                                            url = fArrayList.get(i).getString(TAG_LINK);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                        startActivity(browserIntent);
+
+
+                                    }
+                                })
                                 .show();
                         TextView summaryText = (TextView) summaryBox.findViewById(android.R.id.message);
                         summaryText.setTextSize(12);
-                        if (android.os.Build.VERSION.SDK_INT > 11) {
-                            // Let Android 3.0 above users select the news text
+                        try {
                             summaryText.setTextIsSelectable(true);
+                        } catch ( Exception e ) {
+                            Log.d (TAG, "text could not be set selectable. possible below android v3.0");
                         }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
