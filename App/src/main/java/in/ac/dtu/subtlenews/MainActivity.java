@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -47,30 +48,31 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void onSectionAttached(int number) {
+        mTitle = "Subtle News";
         switch (number) {
             case 1:
-                mTitle = "India";
+                mTitle = mTitle + "/India";
                 break;
             case 2:
-                mTitle = "World";
+                mTitle = mTitle + "/World";
                 break;
             case 3:
-                mTitle = "Entertainment";
+                mTitle = mTitle + "/Entertainment";
                 break;
             case 4:
-                mTitle = "Technology";
+                mTitle = mTitle + "/Technology";
                 break;
             case 5:
-                mTitle = "Business";
+                mTitle = mTitle + "/Business";
                 break;
             case 6:
-                mTitle = "Science";
+                mTitle = mTitle + "/Science";
                 break;
             case 7:
-                mTitle = "Sports";
+                mTitle = mTitle + "/Sports";
                 break;
             case 8:
-                mTitle = "Health";
+                mTitle = mTitle + "/Health";
                 break;
         }
     }

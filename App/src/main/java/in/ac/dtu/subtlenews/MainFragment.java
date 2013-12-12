@@ -78,7 +78,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(sNumber);
+        ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
     }
 
     private static final String NEWSFEED_NAME = "summary";
@@ -115,7 +115,7 @@ public class MainFragment extends Fragment {
 
             ArrayList<JSONObject> selectedCategoryList = new ArrayList<JSONObject>();
 
-            Log.d(TAG, "jsonString" + jsonString);
+            //Log.d(TAG, "jsonString" + jsonString);
             try {
                 JSONObject mJSONObject = new JSONObject(jsonString);
                 JSONArray jsonArray = mJSONObject.getJSONArray(NEWSFEED_NAME);
@@ -129,10 +129,6 @@ public class MainFragment extends Fragment {
 
                 }
 
-                //for debugging only
-                for(JSONObject lol : selectedCategoryList){
-                    Log.d(TAG, lol.getString("category"));
-                }
             } catch (Exception e){
                 e.printStackTrace();
             }
