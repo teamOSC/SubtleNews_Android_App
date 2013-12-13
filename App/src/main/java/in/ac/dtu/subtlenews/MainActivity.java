@@ -1,5 +1,6 @@
 package in.ac.dtu.subtlenews;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +24,8 @@ public class MainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    public static final String PREFS_NAME = "MainPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +40,17 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        Bundle bundle = new Bundle();
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        boolean mainRun = settings.getBoolean("MainRun", false);
 
-        //Right now I'm not sure if it's safe to call it everytime inside onCreate()
-        new NewsAutoRefresh(this, bundle, 0);
+        if(!mainRun){
+            Bundle bundle = new Bundle();
+            new NewsAutoRefresh(this, bundle, 0);
+
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("MainRun", true);
+            editor.commit();
+        }
     }
 
     @Override
