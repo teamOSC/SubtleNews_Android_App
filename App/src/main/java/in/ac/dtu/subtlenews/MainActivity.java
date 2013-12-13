@@ -36,6 +36,11 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        Bundle bundle = new Bundle();
+
+        //Right now I'm not sure if it's safe to call it everytime inside onCreate()
+        new NewsAutoRefresh(this, bundle, 0);
     }
 
     @Override
