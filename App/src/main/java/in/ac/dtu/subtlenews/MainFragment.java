@@ -23,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -117,6 +118,7 @@ public class MainFragment extends Fragment {
 
             } catch (Exception e){
                 e.printStackTrace();
+                new UpdateNews(getActivity()).execute();
             }
 
             ArrayList<JSONObject> selectedCategoryList = new ArrayList<JSONObject>();
