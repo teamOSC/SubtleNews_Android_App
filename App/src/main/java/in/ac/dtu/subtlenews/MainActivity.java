@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -121,9 +122,14 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
         switch (id){
             case R.id.action_refresh:
-                new UpdateNews(MainActivity.this).execute();
-                MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.container);
-                mainFragment.updateView();
+                if(Utils.isNetworkConnected(MainActivity.this)){
+                    new UpdateNews(MainActivity.this).execute();
+                    MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+                    mainFragment.updateView();
+                } else {
+                    Toast.makeText(MainActivity.this, "Please turn on your internet connection first.", Toast.LENGTH_SHORT).show();
+                }
+
                 return true;
             case R.id.action_settings:
                 return true;
