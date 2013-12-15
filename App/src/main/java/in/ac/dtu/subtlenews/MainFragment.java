@@ -174,13 +174,18 @@ public class MainFragment extends Fragment {
                                 .setPositiveButton("Instapaper", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
 
-
-
                                         Intent instapaper = new Intent(getActivity(), InstapaperViewer.class);
                                         instapaper.putExtra("URLID", i);
                                         instapaper.putExtra("URLList", urlArray);
                                         startActivity(instapaper);
 
+                                    }
+                                })
+                                .setNeutralButton("Listen", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent tts = new Intent(getActivity(), TTS.class);
+                                        tts.putExtra("TEXT", i);
+                                        startActivity(tts);
 
                                     }
                                 })
