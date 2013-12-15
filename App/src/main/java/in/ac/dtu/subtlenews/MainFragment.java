@@ -184,7 +184,11 @@ public class MainFragment extends Fragment {
                                 .setNeutralButton("Listen", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         Intent tts = new Intent(getActivity(), TTS.class);
-                                        tts.putExtra("TEXT", i);
+                                        try {
+                                            tts.putExtra("TEXT", fArrayList.get(i).getString(TAG_SUMMARY));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                         startActivity(tts);
 
                                     }

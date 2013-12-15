@@ -19,8 +19,13 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            text = extras.getString("TEXT");
+        }
+
         tts = new TextToSpeech(this, this);
-        speakOut();
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
 
     }
 
@@ -44,7 +49,7 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");
             } else {
-                speakOut();
+                tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
             }
 
         } else {
@@ -52,14 +57,7 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
         }
     }
 
-    private void speakOut() {
-
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            text = extras.getString("URLID");
-        }
-
-    }
+    //private void speakOut() {
+    //}
 
 }
