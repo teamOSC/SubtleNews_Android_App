@@ -4,7 +4,8 @@
     tools:context=".MainActivity" >
     <item android:id="@+id/action_refresh"
         android:title="@string/action_refresh"
-        app:showAsAction="withText|ifRoom" />
+        android:icon="@drawable/icon_refresh"
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
