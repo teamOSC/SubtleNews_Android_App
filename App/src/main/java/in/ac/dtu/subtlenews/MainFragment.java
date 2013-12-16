@@ -120,6 +120,8 @@ public class MainFragment extends Fragment {
                 e.printStackTrace();
                 if (Utils.isNetworkConnected(getActivity())) {
                     new UpdateNews(getActivity()).execute();
+                } else {
+                    Toast.makeText(getActivity(), "Please turn on your internet connection!", Toast.LENGTH_SHORT).show();
                 }
 
             }
