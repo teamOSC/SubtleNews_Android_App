@@ -118,7 +118,10 @@ public class MainFragment extends Fragment {
 
             } catch (Exception e){
                 e.printStackTrace();
-                new UpdateNews(getActivity()).execute();
+                if (Utils.isNetworkConnected(getActivity())) {
+                    new UpdateNews(getActivity()).execute();
+                }
+
             }
 
             ArrayList<JSONObject> selectedCategoryList = new ArrayList<JSONObject>();
