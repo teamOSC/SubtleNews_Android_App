@@ -1,5 +1,6 @@
 package in.ac.dtu.subtlenews;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -25,6 +26,9 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
 
     public UpdateNews(Context context){
         this.context = context;
+
+        Log.d("Update News", "Inside the constructor of UpdateNews class");
+        ((Activity)context).setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
@@ -37,12 +41,15 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
             String result = EntityUtils.toString(entity);
             return result;
         } catch (Exception e) {
+            ((Activity)context).setProgressBarIndeterminateVisibility(false);
             Log.d("[GET REQUEST]", "Network exception", e);
             return null;
         }
     }
 
     protected void onPostExecute(String r) {
+
+        ((Activity)context).setProgressBarIndeterminateVisibility(false);
 
         Log.d("[GET RESPONSE]", r);
         File cacheFile = new File(context.getFilesDir(), "data.json");
