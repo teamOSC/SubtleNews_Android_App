@@ -315,7 +315,7 @@ public class NavigationDrawerFragment extends Fragment {
             TextView navigationTitle = (TextView) rowView.findViewById(R.id.title_navigation);
 
             navigationTitle.setText(mCategoryMap[pos]);
-            navigationTitle.setTextColor(Color.WHITE);
+            //navigationTitle.setTextColor(Color.WHITE);
             navigationIcon.setBackgroundResource(R.drawable.ic_launcher);
 
             String s = mCategoryMap[pos].toString();
