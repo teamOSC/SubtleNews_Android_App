@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -190,6 +191,7 @@ public class MainFragment extends Fragment {
                                             e.printStackTrace();
                                         }
                                         startActivity(tts);
+
 
                                     }
                                 })

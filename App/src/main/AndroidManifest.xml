@@ -36,7 +36,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
         </activity>
-        <activity android:name="in.ac.dtu.subtlenews.TTS" >
+        <activity
+            android:name="in.ac.dtu.subtlenews.TTS"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />

@@ -1,9 +1,18 @@
 package in.ac.dtu.subtlenews;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
+import android.widget.TextView;
+
+import org.json.JSONException;
 
 import java.util.Locale;
 
@@ -26,6 +35,25 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
 
         tts = new TextToSpeech(this, this);
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        AlertDialog summaryBox = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme))
+                .setMessage(text)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        finish();
+
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        finish();
+                    }
+                })
+                .show();
+        TextView summaryText = (TextView) summaryBox.findViewById(android.R.id.message);
+        summaryText.setTextSize(12);
+
 
     }
 
@@ -56,8 +84,14 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
             Log.e("TTS", "Initilization Failed!");
         }
     }
-
-    //private void speakOut() {
-    //}
-
+/*
+    @Override
+    public void onBackPressed() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
+    }
+*/
 }
