@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.Calendar;
 
@@ -39,7 +38,7 @@ public class NewsAutoRefresh extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if(Utils.isNetworkConnected(context)){
-            new UpdateNews(context).execute();
+            new UpdateNews(context, true).execute();
         }
     }
 }

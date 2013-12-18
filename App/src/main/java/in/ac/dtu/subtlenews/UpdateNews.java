@@ -23,12 +23,16 @@ import java.io.FileWriter;
 public class UpdateNews extends AsyncTask <Void, Void, String> {
 
     private Context context;
+    private Boolean ranAutomatically;
 
-    public UpdateNews(Context context){
+    public UpdateNews(Context context, Boolean autorun){
         this.context = context;
+        ranAutomatically = autorun;
 
         Log.d("Update News", "Inside the constructor of UpdateNews class");
-        ((Activity)context).setProgressBarIndeterminateVisibility(true);
+         if (!autorun) {
+             ((Activity)context).setProgressBarIndeterminateVisibility(true);
+         }
     }
 
     @Override
@@ -49,7 +53,9 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
 
     protected void onPostExecute(String r) {
 
-        ((Activity)context).setProgressBarIndeterminateVisibility(false);
+        if (!ranAutomatically) {
+            ((Activity)context).setProgressBarIndeterminateVisibility(false);
+        }
 
         Log.d("[GET RESPONSE]", r);
         File cacheFile = new File(context.getFilesDir(), "data.json");

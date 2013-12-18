@@ -1,7 +1,6 @@
 package in.ac.dtu.subtlenews;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,10 +16,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,9 +29,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.lang.annotation.Target;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by omerjerk on 2/12/13.
@@ -119,7 +114,7 @@ public class MainFragment extends Fragment {
             } catch (Exception e){
                 e.printStackTrace();
                 if (Utils.isNetworkConnected(getActivity())) {
-                    new UpdateNews(getActivity()).execute();
+                    new UpdateNews(getActivity(), true).execute();
                 } else {
                     Toast.makeText(getActivity(), "Please turn on your internet connection!", Toast.LENGTH_SHORT).show();
                 }

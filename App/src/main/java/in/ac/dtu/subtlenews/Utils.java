@@ -13,12 +13,20 @@ public class Utils {
     public static String[] categoryMap = {"India", "World", "Entertainment" , "Technology", "Business","Science" , "Sports", "Health"};
 
     public static boolean isNetworkConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null) {
-            // There are no active networks.
+
+        try {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo ni = cm.getActiveNetworkInfo();
+            if (ni == null) {
+                // There are no active networks.
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
-        } else
-            return true;
+        }
+
     }
 }
