@@ -318,6 +318,35 @@ public class NavigationDrawerFragment extends Fragment {
             navigationTitle.setTextColor(Color.WHITE);
             navigationIcon.setBackgroundResource(R.drawable.ic_launcher);
 
+            String s = mCategoryMap[pos].toString();
+            if (s.equals("World")) {
+                navigationIcon.setBackgroundResource(R.drawable.world);
+
+            } else if (s.equals("India")) {
+                navigationIcon.setBackgroundResource(R.drawable.india);
+
+            }
+            else if (s.equals("Entertainment")) {
+                navigationIcon.setBackgroundResource(R.drawable.entertainment);
+
+            } else if (s.equals("Technology")) {
+                navigationIcon.setBackgroundResource(R.drawable.technology);
+
+            } else if (s.equals("Business")) {
+                navigationIcon.setBackgroundResource(R.drawable.business);
+
+            } else if (s.equals("Science")) {
+                navigationIcon.setBackgroundResource(R.drawable.science);
+
+            } else if (s.equals("Sports")) {
+                navigationIcon.setBackgroundResource(R.drawable.sports);
+
+            } else if (s.equals("Health")) {
+                navigationIcon.setBackgroundResource(R.drawable.health);
+
+            }
+
+
             return rowView;
         }
     }
