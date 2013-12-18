@@ -2,6 +2,7 @@ package in.ac.dtu.subtlenews;
 
 import in.ac.dtu.subtlenews.util.SystemUiHider;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -13,10 +14,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,12 +66,17 @@ public class InstapaperViewer extends Activity {
      */
     private SystemUiHider mSystemUiHider;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setImmersive(true);
+        }
+        setTheme(R.style.AppTheme_NoActionBar);
 
         setContentView(R.layout.activity_instapaper_viewer);
-        setupActionBar();
+        //setupActionBar();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -77,6 +85,25 @@ public class InstapaperViewer extends Activity {
 
         }
         final WebView instapaperView = (WebView) findViewById(R.id.instapaper_viewer);
+        final Activity activity = this;
+        final ProgressBar progressBar;
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        instapaperView.setWebChromeClient(new WebChromeClient() {
+            public void onProgressChanged(WebView view, int progress)
+            {
+                if(progress < 100 && progressBar.getVisibility() == ProgressBar.GONE){
+                    progressBar.setVisibility(ProgressBar.VISIBLE);
+                    //txtview.setVisibility(View.VISIBLE);
+                }
+                progressBar.setProgress(progress);
+                if(progress == 100) {
+                    progressBar.setVisibility(ProgressBar.GONE);
+                    //txtview.setVisibility(View.GONE);
+                }
+            }
+        });
+
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.instapaper_viewer);
@@ -97,7 +124,7 @@ public class InstapaperViewer extends Activity {
                     @Override
                     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
                     public void onVisibilityChange(boolean visible) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                             // If the ViewPropertyAnimator API is available
                             // (Honeycomb MR2 and later), use it to animate the
                             // in-layout UI controls at the bottom of the
@@ -124,13 +151,7 @@ public class InstapaperViewer extends Activity {
                             delayedHide(AUTO_HIDE_DELAY_MILLIS);
                         }
 
-                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)instapaperView.getLayoutParams();
-                        if (visible) {
-                            params.setMargins(0, (int)(mControlsHeight*1.5), 0, 0); //substitute parameters for left, top, right, bottom
-                        } else {
-                            params.setMargins(0, 0, 0, 0);
-                        }
-                        instapaperView.setLayoutParams(params);
+
 
                     }
                 });
@@ -158,6 +179,7 @@ public class InstapaperViewer extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         instapaperView.loadUrl(summaryUrl);
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,13 +219,13 @@ public class InstapaperViewer extends Activity {
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    /*@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
