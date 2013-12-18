@@ -17,8 +17,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -270,9 +272,11 @@ public class MainFragment extends Fragment {
                 rowView = convertView;
             }
 
+            LinearLayout newsItem = (LinearLayout) rowView.findViewById(R.id.news_item);
             TextView newsTitle = (TextView) rowView.findViewById(R.id.title_news);
             TextView sourceName = (TextView) rowView.findViewById(R.id.source_news);
             TextView newsDate = (TextView) rowView.findViewById(R.id.date_news);
+            newsItem.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 175));
             sourceName.setTextColor(Color.GRAY);
             sourceName.setTextSize(10);
             newsDate.setTextColor(Color.GRAY);

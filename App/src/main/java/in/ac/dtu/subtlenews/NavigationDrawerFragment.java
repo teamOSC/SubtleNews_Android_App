@@ -318,7 +318,7 @@ public class NavigationDrawerFragment extends Fragment {
             //navigationTitle.setTextColor(Color.WHITE);
             navigationIcon.setBackgroundResource(R.drawable.ic_launcher);
 
-            String s = mCategoryMap[pos].toString();
+            String s = mCategoryMap[pos];
             if (s.equals("World")) {
                 navigationIcon.setBackgroundResource(R.drawable.world);
 
