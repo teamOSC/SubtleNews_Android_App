@@ -276,7 +276,8 @@ public class MainFragment extends Fragment {
             TextView newsTitle = (TextView) rowView.findViewById(R.id.title_news);
             TextView sourceName = (TextView) rowView.findViewById(R.id.source_news);
             TextView newsDate = (TextView) rowView.findViewById(R.id.date_news);
-            newsItem.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 70));
+            newsItem.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            newsItem.setPadding(5,10,5,10);
             sourceName.setTextColor(Color.GRAY);
             sourceName.setTextSize(10);
             newsDate.setTextColor(Color.GRAY);
