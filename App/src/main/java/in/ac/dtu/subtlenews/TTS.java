@@ -37,13 +37,6 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         AlertDialog summaryBox = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme))
                 .setMessage(text)
-                .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        finish();
-
-                    }
-                })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialogInterface) {
@@ -51,6 +44,15 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
                     }
                 })
                 .show();
+
+        summaryBox.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                finish();
+
+            }
+        });
         TextView summaryText = (TextView) summaryBox.findViewById(android.R.id.message);
         summaryText.setTextSize(12);
 
