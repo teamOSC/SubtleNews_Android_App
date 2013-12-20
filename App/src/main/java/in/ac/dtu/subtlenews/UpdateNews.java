@@ -44,15 +44,25 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
 
     private Context context;
     private Boolean ranAutomatically;
+    private MainFragment mainFragment = null;
 
-    public UpdateNews(Context context, Boolean autorun){
+    public UpdateNews(Context context, Boolean ranAutomatically){
+        this(context, ranAutomatically, null);
+    }
+
+    public UpdateNews(Context context, Boolean ranAutomatically, MainFragment mainFragment){
+
         this.context = context;
-        ranAutomatically = autorun;
+        this.ranAutomatically = ranAutomatically;
+
+        if(mainFragment != null){
+            this.mainFragment = mainFragment;
+        }
 
         Log.d("Update News", "Inside the constructor of UpdateNews class");
-         if (!autorun) {
-             ((Activity)context).setProgressBarIndeterminateVisibility(true);
-         }
+        if (!ranAutomatically) {
+            ((Activity)context).setProgressBarIndeterminateVisibility(true);
+        }
     }
 
     @Override
@@ -75,6 +85,14 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
 
         if (!ranAutomatically) {
             ((Activity)context).setProgressBarIndeterminateVisibility(false);
+
+            // mainFragment will never be null when ranAutomatically is false
+            if(mainFragment == null){
+                Log.d("UpdateNews", "This fucking thing is null");
+            } else {
+                mainFragment.updateView();
+            }
+
         }
 
         Log.d("[GET RESPONSE]", r);

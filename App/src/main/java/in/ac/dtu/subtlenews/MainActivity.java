@@ -96,7 +96,9 @@ public class MainActivity extends ActionBarActivity
 
             //Try to read shared prefs if they exist (most possibly they won't) else 3 hours is default
             SharedPreferences defaultPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-            new NewsAutoRefresh(this, 0, Integer.parseInt(defaultPrefs.getString("sync_frequency", "3")) * 60 * 60 * 1000);
+            int interval = Integer.parseInt(defaultPrefs.getString("sync_frequency", "3")) * 60 * 60 * 1000;
+            //start the autorefresh after a delay of value interval
+            new NewsAutoRefresh(this, interval, interval);
 
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("MainRun", true);

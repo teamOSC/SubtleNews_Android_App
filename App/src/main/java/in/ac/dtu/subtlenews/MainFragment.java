@@ -114,7 +114,7 @@ public class MainFragment extends Fragment {
     private static final String TAG_LINK = "link";
     private static final String TAG_DATE = "date";
 
-    public  void updateView(){
+    public void updateView(){
         new ReadFromJSON().execute();
     }
 
@@ -137,7 +137,7 @@ public class MainFragment extends Fragment {
             } catch (Exception e){
                 e.printStackTrace();
                 if (Utils.isNetworkConnected(getActivity())) {
-                    new UpdateNews(getActivity(), true).execute();
+                    new UpdateNews(getActivity(), false, MainFragment.this).execute();
                 } else {
                     Toast.makeText(getActivity(), "Please turn on your internet connection!", Toast.LENGTH_SHORT).show();
                 }
