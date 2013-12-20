@@ -155,10 +155,10 @@ public class MainActivity extends ActionBarActivity
                 }
 
                 return true;
-            /*case R.id.action_settings:
+            case R.id.action_settings:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingsIntent);
-                return true;*/
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
