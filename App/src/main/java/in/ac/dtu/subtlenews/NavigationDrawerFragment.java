@@ -20,19 +20,18 @@
 
 package in.ac.dtu.subtlenews;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -105,7 +104,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated (Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
@@ -113,7 +112,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -296,7 +295,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         String[] mCategoryMap;
 
-        public NavigationDrawerAdapter( String[] mCategoryMap ){
+        public NavigationDrawerAdapter(String[] mCategoryMap) {
 
             this.mCategoryMap = mCategoryMap;
         }
@@ -324,7 +323,7 @@ public class NavigationDrawerFragment extends Fragment {
 
             View rowView;
 
-            if(convertView == null){
+            if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 rowView = inflater.inflate(R.layout.row_navigation_drawer, null);
             } else {
@@ -345,8 +344,7 @@ public class NavigationDrawerFragment extends Fragment {
             } else if (s.equals("India")) {
                 navigationIcon.setBackgroundResource(R.drawable.india_b);
 
-            }
-            else if (s.equals("Entertainment")) {
+            } else if (s.equals("Entertainment")) {
                 navigationIcon.setBackgroundResource(R.drawable.entertainment_b);
 
             } else if (s.equals("Technology")) {

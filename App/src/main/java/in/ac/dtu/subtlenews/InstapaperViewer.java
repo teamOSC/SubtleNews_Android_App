@@ -20,31 +20,24 @@
 
 package in.ac.dtu.subtlenews;
 
-import in.ac.dtu.subtlenews.util.SystemUiHider;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
+
+import in.ac.dtu.subtlenews.util.SystemUiHider;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -110,14 +103,13 @@ public class InstapaperViewer extends Activity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         instapaperView.setWebChromeClient(new WebChromeClient() {
-            public void onProgressChanged(WebView view, int progress)
-            {
-                if(progress < 100 && progressBar.getVisibility() == ProgressBar.GONE){
+            public void onProgressChanged(WebView view, int progress) {
+                if (progress < 100 && progressBar.getVisibility() == ProgressBar.GONE) {
                     progressBar.setVisibility(ProgressBar.VISIBLE);
                     //txtview.setVisibility(View.VISIBLE);
                 }
                 progressBar.setProgress(progress);
-                if(progress == 100) {
+                if (progress == 100) {
                     progressBar.setVisibility(ProgressBar.GONE);
                     //txtview.setVisibility(View.GONE);
                 }
@@ -170,7 +162,6 @@ public class InstapaperViewer extends Activity {
                             // Schedule a hide().
                             delayedHide(AUTO_HIDE_DELAY_MILLIS);
                         }
-
 
 
                     }
@@ -246,7 +237,6 @@ public class InstapaperViewer extends Activity {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
