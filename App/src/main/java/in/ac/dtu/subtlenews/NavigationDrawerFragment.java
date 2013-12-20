@@ -340,29 +340,29 @@ public class NavigationDrawerFragment extends Fragment {
 
             String s = mCategoryMap[pos];
             if (s.equals("World")) {
-                navigationIcon.setBackgroundResource(R.drawable.world);
+                navigationIcon.setBackgroundResource(R.drawable.world_b);
 
             } else if (s.equals("India")) {
-                navigationIcon.setBackgroundResource(R.drawable.india);
+                navigationIcon.setBackgroundResource(R.drawable.india_b);
 
             }
             else if (s.equals("Entertainment")) {
-                navigationIcon.setBackgroundResource(R.drawable.entertainment);
+                navigationIcon.setBackgroundResource(R.drawable.entertainment_b);
 
             } else if (s.equals("Technology")) {
-                navigationIcon.setBackgroundResource(R.drawable.technology);
+                navigationIcon.setBackgroundResource(R.drawable.technology_b);
 
             } else if (s.equals("Business")) {
-                navigationIcon.setBackgroundResource(R.drawable.business);
+                navigationIcon.setBackgroundResource(R.drawable.business_b);
 
             } else if (s.equals("Science")) {
-                navigationIcon.setBackgroundResource(R.drawable.science);
+                navigationIcon.setBackgroundResource(R.drawable.science_b);
 
             } else if (s.equals("Sports")) {
-                navigationIcon.setBackgroundResource(R.drawable.sports);
+                navigationIcon.setBackgroundResource(R.drawable.sports_b);
 
             } else if (s.equals("Health")) {
-                navigationIcon.setBackgroundResource(R.drawable.health);
+                navigationIcon.setBackgroundResource(R.drawable.health_b);
 
             }
 
