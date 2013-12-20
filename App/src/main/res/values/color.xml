@@ -22,4 +22,6 @@
 <resources>
     <color name="drawer_background">#fdfdfd</color>
     <color name="drawer_list_divider">#afafaf</color>
+    <color name="splash_background">#ffffff</color>
+
 </resources>

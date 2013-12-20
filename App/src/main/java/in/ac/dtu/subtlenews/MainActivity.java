@@ -20,17 +20,23 @@
 
 package in.ac.dtu.subtlenews;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity
@@ -52,8 +58,25 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
         setContentView(R.layout.activity_main);
+        final ImageView splashScreen = (ImageView) findViewById(R.id.splashScreen);
+
+
+        new CountDownTimer(3000, 1000)
+        {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                splashScreen.bringToFront();
+
+            }
+            @Override
+            public void onFinish() {
+                splashScreen.setVisibility(View.INVISIBLE);
+            }
+
+        }.start();
+
+        //setContentView(R.layout.activity_main);
 
         setProgressBarIndeterminateVisibility(false);
 

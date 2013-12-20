@@ -32,7 +32,21 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/splashScreen"
+            android:background="@color/splash_background"
+            android:src="@drawable/splash" />
+
+
+        </FrameLayout>
+
+
+
+
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
          this as a sliding drawer on the left side for left-to-right
@@ -45,5 +59,6 @@
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:name="in.ac.dtu.subtlenews.NavigationDrawerFragment" />
+        android:name="in.ac.dtu.subtlenews.NavigationDrawerFragment"
+        tools:layout="@layout/fragment_navigation_drawer" />
 </android.support.v4.widget.DrawerLayout>
