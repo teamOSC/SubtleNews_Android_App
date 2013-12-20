@@ -23,6 +23,7 @@ package in.ac.dtu.subtlenews;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -69,8 +70,10 @@ public class MainActivity extends ActionBarActivity
         boolean mainRun = settings.getBoolean("MainRun", false);
 
         if(!mainRun){
-            Bundle bundle = new Bundle();
-            new NewsAutoRefresh(this, bundle, 0);
+
+            //Try to read shared prefs if they exist (most possibly they won't) else 3 hours is default
+            SharedPreferences defaultPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            new NewsAutoRefresh(this, 0, Integer.parseInt(defaultPrefs.getString("sync_frequency", "3")) * 60 * 60 * 1000);
 
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("MainRun", true);

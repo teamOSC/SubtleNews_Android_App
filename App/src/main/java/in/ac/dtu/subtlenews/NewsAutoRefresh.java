@@ -26,6 +26,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -38,7 +39,7 @@ public class NewsAutoRefresh extends BroadcastReceiver {
     public NewsAutoRefresh() {}
 
     //This constructor is called by the MainActivity
-    public NewsAutoRefresh(Context context, Bundle extras, int timeoutInSeconds){
+    public NewsAutoRefresh(Context context, int timeoutInSeconds, int interval){
         AlarmManager alarmMgr =
                 (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, NewsAutoRefresh.class);
@@ -50,7 +51,7 @@ public class NewsAutoRefresh extends BroadcastReceiver {
         time.add(Calendar.SECOND, timeoutInSeconds);
 
         //It'll repeat every 5 hours
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time.getTimeInMillis(), 5 * 60 * 60 * 1000,
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time.getTimeInMillis(), interval,
                 pendingIntent);
     }
 

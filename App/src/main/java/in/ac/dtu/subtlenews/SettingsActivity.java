@@ -21,7 +21,10 @@
 package in.ac.dtu.subtlenews;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -210,6 +213,15 @@ public class SettingsActivity extends PreferenceActivity {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
+            }
+
+            if (preference.getKey().equals("sync_frequency")) {
+                AlarmManager alarmManager = (AlarmManager)preference.getContext().getSystemService(Context.ALARM_SERVICE);
+                Intent intentOnAlarmReceiver = new Intent(preference.getContext(), NewsAutoRefresh.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(preference.getContext(), 0, intentOnAlarmReceiver, 0);
+                alarmManager.cancel(pendingIntent);
+
+                new NewsAutoRefresh(preference.getContext(), 0, Integer.parseInt(value.toString()) * 60 * 60 * 1000 );
             }
             return true;
         }
