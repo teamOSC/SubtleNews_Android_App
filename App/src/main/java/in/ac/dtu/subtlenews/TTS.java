@@ -22,17 +22,12 @@ package in.ac.dtu.subtlenews;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.widget.TextView;
-
-import org.json.JSONException;
 
 import java.util.Locale;
 

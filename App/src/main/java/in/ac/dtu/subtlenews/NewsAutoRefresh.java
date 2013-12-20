@@ -25,8 +25,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 
 import java.util.Calendar;
 
@@ -36,12 +34,13 @@ import java.util.Calendar;
 public class NewsAutoRefresh extends BroadcastReceiver {
 
     //The default constructor
-    public NewsAutoRefresh() {}
+    public NewsAutoRefresh() {
+    }
 
     //This constructor is called by the MainActivity
-    public NewsAutoRefresh(Context context, int timeoutInSeconds, int interval){
+    public NewsAutoRefresh(Context context, int timeoutInSeconds, int interval) {
         AlarmManager alarmMgr =
-                (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+                (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, NewsAutoRefresh.class);
         PendingIntent pendingIntent =
                 PendingIntent.getBroadcast(context, 0, intent,
@@ -58,7 +57,7 @@ public class NewsAutoRefresh extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if(Utils.isNetworkConnected(context)){
+        if (Utils.isNetworkConnected(context)) {
             new UpdateNews(context, true).execute();
         }
     }

@@ -34,13 +34,12 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 
 import java.util.List;
 
@@ -49,7 +48,7 @@ import java.util.List;
  * handset devices, settings are presented as a single list. On tablets,
  * settings are split by category, with category headers shown to the left of
  * the list of settings.
- * <p>
+ * <p/>
  * See <a href="http://developer.android.com/design/patterns/settings.html">
  * Android Design: Settings</a> for design guidelines and the <a
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
@@ -129,7 +128,9 @@ public class SettingsActivity extends PreferenceActivity {
         bindPreferenceSummaryToValue(findPreference("sync_frequency"));
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean onIsMultiPane() {
         return isXLargeTablet(this) && !isSimplePreferences(this);
@@ -157,7 +158,9 @@ public class SettingsActivity extends PreferenceActivity {
                 || !isXLargeTablet(context);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void onBuildHeaders(List<Header> target) {
@@ -216,12 +219,12 @@ public class SettingsActivity extends PreferenceActivity {
             }
 
             if (preference.getKey().equals("sync_frequency")) {
-                AlarmManager alarmManager = (AlarmManager)preference.getContext().getSystemService(Context.ALARM_SERVICE);
+                AlarmManager alarmManager = (AlarmManager) preference.getContext().getSystemService(Context.ALARM_SERVICE);
                 Intent intentOnAlarmReceiver = new Intent(preference.getContext(), NewsAutoRefresh.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(preference.getContext(), 0, intentOnAlarmReceiver, 0);
                 alarmManager.cancel(pendingIntent);
 
-                new NewsAutoRefresh(preference.getContext(), 0, Integer.parseInt(value.toString()) * 60 * 60 * 1000 );
+                new NewsAutoRefresh(preference.getContext(), 0, Integer.parseInt(value.toString()) * 60 * 60 * 1000);
             }
             return true;
         }

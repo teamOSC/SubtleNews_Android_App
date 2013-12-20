@@ -30,7 +30,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -66,7 +65,7 @@ public class MainFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String TAG = "MAIN_FRAGMENT";
 
-    private int sNumber ;
+    private int sNumber;
     public ArrayList<String> urlArray = new ArrayList<String>();
 
     View rootView;
@@ -114,10 +113,9 @@ public class MainFragment extends Fragment {
     private static final String TAG_LINK = "link";
     private static final String TAG_DATE = "date";
 
-    public void updateView(){
+    public void updateView() {
         new ReadFromJSON().execute();
     }
-
 
 
     private class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<JSONObject>> {
@@ -129,12 +127,12 @@ public class MainFragment extends Fragment {
 
             try {
                 //Log.d(TAG, getActivity().getFilesDir() + "data.json");
-                File cacheFile = new File(getActivity().getFilesDir() , "data.json");
+                File cacheFile = new File(getActivity().getFilesDir(), "data.json");
 
                 BufferedReader br = new BufferedReader(new FileReader(cacheFile));
                 jsonString = br.readLine();
 
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 if (Utils.isNetworkConnected(getActivity())) {
                     new UpdateNews(getActivity(), false, MainFragment.this).execute();
@@ -151,17 +149,17 @@ public class MainFragment extends Fragment {
                 JSONObject mJSONObject = new JSONObject(jsonString);
                 JSONArray jsonArray = mJSONObject.getJSONArray(NEWSFEED_NAME);
 
-                for(int i = 1; i < jsonArray.length(); ++i){
+                for (int i = 1; i < jsonArray.length(); ++i) {
                     JSONObject obj = jsonArray.getJSONObject(i);
 
-                    if(obj.getString(TAG_CATEGORY).equals(Utils.categoryMap[sNumber - 1])){
+                    if (obj.getString(TAG_CATEGORY).equals(Utils.categoryMap[sNumber - 1])) {
                         selectedCategoryList.add(obj);
                         urlArray.add(obj.getString(TAG_LINK));
                     }
 
                 }
 
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -174,7 +172,7 @@ public class MainFragment extends Fragment {
             Set onItemClickListener on the listview which will display the summary of the news.
          */
 
-        protected void onPostExecute(ArrayList<JSONObject> mArrayList){
+        protected void onPostExecute(ArrayList<JSONObject> mArrayList) {
 
             final ArrayList<JSONObject> fArrayList = mArrayList;
 
@@ -239,8 +237,8 @@ public class MainFragment extends Fragment {
                         summaryText.setTextSize(12);
                         try {
                             summaryText.setTextIsSelectable(true);
-                        } catch ( Exception e ) {
-                            Log.d (TAG, "text could not be set selectable. possible below android v3.0");
+                        } catch (Exception e) {
+                            Log.d(TAG, "text could not be set selectable. possible below android v3.0");
                         }
 
                     } catch (JSONException e) {
@@ -256,7 +254,7 @@ public class MainFragment extends Fragment {
 
         private ArrayList<JSONObject> selectedCategoryList;
 
-        public ListViewLoader( ArrayList<JSONObject> selectedCategoryList ){
+        public ListViewLoader(ArrayList<JSONObject> selectedCategoryList) {
 
             this.selectedCategoryList = selectedCategoryList;
         }
@@ -285,7 +283,7 @@ public class MainFragment extends Fragment {
 
             View rowView;
 
-            if(convertView == null){
+            if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 rowView = inflater.inflate(R.layout.row_list, null);
             } else {
@@ -297,7 +295,7 @@ public class MainFragment extends Fragment {
             TextView sourceName = (TextView) rowView.findViewById(R.id.source_news);
             TextView newsDate = (TextView) rowView.findViewById(R.id.date_news);
             newsItem.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            newsItem.setPadding(5,10,5,10);
+            newsItem.setPadding(5, 10, 5, 10);
             sourceName.setTextColor(Color.GRAY);
             sourceName.setTextSize(10);
             newsDate.setTextColor(Color.GRAY);
@@ -306,7 +304,7 @@ public class MainFragment extends Fragment {
                 newsTitle.setText(selectedCategoryList.get(position).getString(TAG_TITLE));
                 sourceName.setText(selectedCategoryList.get(position).getString(TAG_SOURCE));
                 newsDate.setText(selectedCategoryList.get(position).getString(TAG_DATE));
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
