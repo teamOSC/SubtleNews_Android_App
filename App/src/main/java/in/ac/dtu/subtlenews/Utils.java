@@ -23,6 +23,7 @@ package in.ac.dtu.subtlenews;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 
 /**
  * Utility class which includes stuffs that wll be used at various places
@@ -49,4 +50,11 @@ public class Utils {
         }
 
     }
+
+    public static boolean isBelowHolo() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            return false;
+        else
+            return true;
+        }
 }

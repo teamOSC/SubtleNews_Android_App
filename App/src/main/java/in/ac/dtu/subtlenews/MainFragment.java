@@ -235,11 +235,8 @@ public class MainFragment extends Fragment {
                                 .show();
                         TextView summaryText = (TextView) summaryBox.findViewById(android.R.id.message);
                         summaryText.setTextSize(12);
-                        try {
+                        if(!Utils.isBelowHolo())
                             summaryText.setTextIsSelectable(true);
-                        } catch (Exception e) {
-                            Log.d(TAG, "text could not be set selectable. possible below android v3.0");
-                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
