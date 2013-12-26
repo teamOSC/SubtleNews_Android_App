@@ -135,7 +135,7 @@ public class MainFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
                 if (Utils.isNetworkConnected(getActivity())) {
-                    new UpdateNews(getActivity(), false, MainFragment.this).execute();
+                    new UpdateNews(getActivity(), true, MainFragment.this).execute();
                 } else {
                     Toast.makeText(getActivity(), "Please turn on your internet connection!", Toast.LENGTH_SHORT).show();
                 }
