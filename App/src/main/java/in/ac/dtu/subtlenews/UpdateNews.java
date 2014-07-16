@@ -70,7 +70,7 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
 
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse response = httpclient.execute(new HttpGet("http://springboard.championswimmer.in/sauravtom/summary.txt"));
+            HttpResponse response = httpclient.execute(new HttpGet("http://tosc.in/sauravtom/summary.txt"));
             HttpEntity entity = response.getEntity();
             String result = EntityUtils.toString(entity);
             return result;
