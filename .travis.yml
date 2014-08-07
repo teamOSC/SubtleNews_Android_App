@@ -1,7 +1,7 @@
 language: android
 branches:
   only:
-    - master
+    - dev
     - stable
 android:
   components:
