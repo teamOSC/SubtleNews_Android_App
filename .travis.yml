@@ -1,9 +1,11 @@
 language: android
+
 branches:
   only:
     - dev
-    - stable
+
 script: "./gradlew clean assembleDebug"
+
 android:
   components:
     # Uncomment the lines below if you want to
