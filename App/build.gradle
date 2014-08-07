@@ -17,24 +17,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
-    }
-}
-apply plugin: 'android'
-
-repositories {
-    mavenCentral()
-}
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "18.1.1"
+    buildToolsVersion '19.1.0'
 
     defaultConfig {
         minSdkVersion 7
@@ -68,5 +55,5 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:19.0.0'
-    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:appcompat-v7:19.0.0'
 }
