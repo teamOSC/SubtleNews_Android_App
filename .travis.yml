@@ -1,4 +1,8 @@
 language: android
+branches:
+  only:
+    - master
+    - stable
 android:
   components:
     # Uncomment the lines below if you want to
