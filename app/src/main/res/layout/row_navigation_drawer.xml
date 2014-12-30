@@ -23,12 +23,12 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:paddingTop="5dp"
-    android:paddingBottom="5dp" >
+    android:paddingBottom="5dp">
 
     <ImageView
         android:id="@+id/icon_navigation"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_alignParentLeft="true"
@@ -42,6 +42,8 @@
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/icon_navigation"
         android:layout_centerVertical="true"
-        android:paddingRight="40dp"/>
+        android:paddingRight="40dp"
+        android:textSize="@dimen/navigation_drawer_text_size"
+        android:fontFamily="Roboto regular"/>
 
 </RelativeLayout>

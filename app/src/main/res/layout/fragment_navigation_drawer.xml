@@ -24,6 +24,6 @@
     android:layout_height="match_parent"
     android:choiceMode="singleChoice"
     android:background="@color/drawer_background"
-    android:divider="@color/drawer_list_divider"
-    android:dividerHeight="1dp"
-    tools:context="in.ac.dtu.subtlenews.NavigationDrawerFragment" />
+    android:divider="@color/drawer_background"
+    android:dividerHeight="0dp"
+    tools:context="in.ac.dtu.subtlenews.NavigationDrawerFragment"/>
