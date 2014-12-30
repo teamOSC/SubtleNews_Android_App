@@ -292,13 +292,14 @@ public class MainFragment extends Fragment {
 
             LinearLayout newsItem = (LinearLayout) rowView.findViewById(R.id.news_item);
             TextView newsTitle = (TextView) rowView.findViewById(R.id.title_news);
+            newsTitle.setTextColor(getResources().getColor(R.color.dark_teal));
             TextView sourceName = (TextView) rowView.findViewById(R.id.source_news);
             TextView newsDate = (TextView) rowView.findViewById(R.id.date_news);
             newsItem.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             newsItem.setPadding(5, 10, 5, 10);
-            sourceName.setTextColor(Color.GRAY);
+            sourceName.setTextColor(getResources().getColor(R.color.colorAccent));
             sourceName.setTextSize(10);
-            newsDate.setTextColor(Color.GRAY);
+            newsDate.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             newsDate.setTextSize(10);
             try {
                 newsTitle.setText(selectedCategoryList.get(position).getString(TAG_TITLE));

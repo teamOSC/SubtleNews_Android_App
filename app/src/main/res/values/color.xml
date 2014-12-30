@@ -30,6 +30,7 @@
 
     <color name="material_teal">@color/material_deep_teal_500</color>
     <color name="ripple_material_teal">#ff149691</color>
+    <color name="dark_teal">#00695C</color>
 
     <color name="blue">#2196F3</color>
     <color name="blue_accent">#0D47A1</color>
@@ -47,6 +48,8 @@
     <color name="blue_transparent">#aa293576</color>
     <color name="windowBackgroundColor">#333333</color>
     <color name="black_translucent">#80000000</color>
+    <color name="brown_translucent">#aa563F1B</color>
+    <color name="orange_translucent">#aaE65100</color>
     <color name="black">#000000</color>
 
 

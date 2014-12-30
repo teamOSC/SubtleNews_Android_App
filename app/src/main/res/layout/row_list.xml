@@ -25,7 +25,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:layout_margin="1dp"
+    android:layout_margin="0dp"
     android:background="@drawable/selector_card_background">
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textSize="19sp"
         android:padding="5dp"/>
-    
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
