@@ -24,7 +24,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -105,15 +107,19 @@ public class UpdateNews extends AsyncTask <Void, Void, String> {
                 cacheFile.createNewFile();
             }
 
-            FileWriter fw = new FileWriter(cacheFile.getAbsoluteFile());
+            FileWriter fw = new FileWriter(cacheFile.getAbsoluteFile()); //(Activity) context
             bw = new BufferedWriter(fw);
             bw.write(r);
 
-            Toast.makeText(context, "News refreshed!", Toast.LENGTH_SHORT).show();
+            SnackbarManager.show(
+                    Snackbar.with((Activity) context)
+                            .text("News Refreshed!"));
 
         } catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(context, "Sorry! Something went wrong.", Toast.LENGTH_SHORT).show();
+            SnackbarManager.show(
+                    Snackbar.with((Activity) context)
+                            .text("Sorry! Something went wrong :'("));
         } finally {
             try {
                 bw.close();
