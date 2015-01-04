@@ -34,6 +34,9 @@ MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.android.support:cardview-v7:21.0.3:15:5
 MERGED from me.drakeet.materialdialog:library:1.2.2:8:5
+MERGED from com.nispok:snackbar:2.7.3:6:5
+MERGED from com.android.support:recyclerview-v7:21.0.2:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:33:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -48,6 +51,9 @@ MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.android.support:appcompat-v7:21.0.3:16:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.android.support:cardview-v7:21.0.3:16:5
+MERGED from com.nispok:snackbar:2.7.3:10:5
+MERGED from com.android.support:recyclerview-v7:21.0.2:17:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
 		ADDED from AndroidManifest.xml:38:9
 	android:allowBackup
@@ -118,3 +124,9 @@ ADDED from AndroidManifest.xml:75:9
 		ADDED from AndroidManifest.xml:78:13
 	android:name
 		ADDED from AndroidManifest.xml:76:13
+activity#android.support.v7.widget.TestActivity
+ADDED from com.android.support:recyclerview-v7:21.0.2:18:9
+	android:label
+		ADDED from com.android.support:recyclerview-v7:21.0.2:18:19
+	android:name
+		ADDED from com.android.support:recyclerview-v7:21.0.2:18:60

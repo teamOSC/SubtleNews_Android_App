@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SubtleNews_Android_App.iml" filepath="$PROJECT_DIR$/SubtleNews_Android_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/materialDialog_lib/materialDialog_lib.iml" filepath="$PROJECT_DIR$/materialDialog_lib/materialDialog_lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/snack_lib/snack_lib.iml" filepath="$PROJECT_DIR$/snack_lib/snack_lib.iml" />
     </modules>
   </component>
 </project>

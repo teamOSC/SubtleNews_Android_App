@@ -35,7 +35,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.nispok.snackbar.Snackbar;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -191,14 +192,16 @@ public class MainActivity extends ActionBarActivity
                     MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.container);
                     mainFragment.updateView();
                 } else {
-                    Toast.makeText(MainActivity.this, "Please turn on your internet connection first.", Toast.LENGTH_SHORT).show();
+                    Snackbar.with(getApplicationContext()) // context
+                            .text("Please turn on your internet connection first") // text to display
+                            .show(MainActivity.this);
                 }
 
                 return true;
             case R.id.action_settings:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingsIntent);
-                return true;
+                return true;        
         }
         return super.onOptionsItemSelected(item);
     }

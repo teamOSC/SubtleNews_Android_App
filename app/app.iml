@@ -111,7 +111,6 @@
     <orderEntry type="library" exported="" name="recyclerview-v7-21.0.2" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="snackbar-2.7.3" level="project" />
-    <orderEntry type="module" module-name="snack_lib" />
   </component>
 </module>
 
