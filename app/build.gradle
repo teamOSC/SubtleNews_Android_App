@@ -32,6 +32,6 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.3'
-    compile 'me.drakeet.materialdialog:library:1.2.2'
+    compile 'com.afollestad:material-dialogs:0.5.5'
     compile 'com.nispok:snackbar:2.7.3'
 }

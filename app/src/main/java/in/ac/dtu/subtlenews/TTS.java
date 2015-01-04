@@ -21,13 +21,12 @@
 package in.ac.dtu.subtlenews;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
-import android.widget.TextView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.Locale;
 
@@ -50,6 +49,25 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
 
         tts = new TextToSpeech(this, this);
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+
+        // MaterialDialog Implemented by Yogesh Balan -- no need for thanks Saurav :-p 
+        new MaterialDialog.Builder(TTS.this)
+                .content(text)
+                .cancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        finish();
+                    }
+                })
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        finish();
+                    }
+                })
+                .show();
+        
+        /*
         AlertDialog summaryBox = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme))
                 .setMessage(text)
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -70,7 +88,7 @@ public class TTS extends Activity implements TextToSpeech.OnInitListener {
         });
         TextView summaryText = (TextView) summaryBox.findViewById(android.R.id.message);
         summaryText.setTextSize(12);
-
+        */
 
     }
 

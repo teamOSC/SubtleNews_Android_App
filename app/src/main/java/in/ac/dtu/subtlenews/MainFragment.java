@@ -22,17 +22,13 @@ package in.ac.dtu.subtlenews;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +40,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -192,6 +190,53 @@ public class MainFragment extends Fragment {
                         summaryTitle.setPadding(8, 8, 8, 8);
                         summaryTitle.setGravity(Gravity.CENTER);
                         summaryTitle.setTextColor(Color.GRAY);
+                        
+                        CharSequence mySummaryTitle = summaryTitle.getText().toString();
+
+                        //Material Dialog -- Implemented by Yogesh Balan :-p
+                        new MaterialDialog.Builder(getActivity())
+                                .title(mySummaryTitle)
+                                .content(fArrayList.get(i).getString(TAG_SUMMARY))
+                                .positiveText("Instapaper")
+                                .negativeText("Source")
+                                .neutralText("Listen")
+                                .callback(new MaterialDialog.ButtonCallback() {
+                                    @Override
+                                    public void onPositive(MaterialDialog dialog) {
+                                        Intent instapaper = new Intent(getActivity(), InstapaperViewer.class);
+                                        instapaper.putExtra("URLID", i);
+                                        instapaper.putExtra("URLList", urlArray);
+                                        startActivity(instapaper);
+                                    }
+
+                                    @Override
+                                    public void onNegative(MaterialDialog dialog) {
+                                        /* TODO :
+                                        USE webview to implement in-app browser instead of this
+                                                */
+                                        String url = "http://www.google.com";
+                                        try {
+                                            url = fArrayList.get(i).getString(TAG_LINK);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                        startActivity(browserIntent);
+                                    }
+
+                                    @Override
+                                    public void onNeutral(MaterialDialog dialog) {
+                                        Intent tts = new Intent(getActivity(), TTS.class);
+                                        try {
+                                            tts.putExtra("TEXT", fArrayList.get(i).getString(TAG_SUMMARY));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        startActivity(tts);
+                                    }
+                                }).show();
+
+                        /*
                         AlertDialog summaryBox = new AlertDialog.Builder(getActivity())
                                 .setCustomTitle(summaryTitle)
                                 .setMessage(fArrayList.get(i).getString(TAG_SUMMARY))
@@ -222,7 +267,7 @@ public class MainFragment extends Fragment {
                                     public void onClick(DialogInterface dialog, int id) {
                                         /* TODO :
                                             USE webview to implement in-app browser instead of this
-                                         */
+                                         *//*
                                         String url = "http://www.google.com";
                                         try {
                                             url = fArrayList.get(i).getString(TAG_LINK);
@@ -236,10 +281,12 @@ public class MainFragment extends Fragment {
                                     }
                                 })
                                 .show();
+                        /*
                         TextView summaryText = (TextView) summaryBox.findViewById(android.R.id.message);
                         summaryText.setTextSize(12);
                         if(!Utils.isBelowHolo())
                             summaryText.setTextIsSelectable(true);
+                        */
 
                     } catch (JSONException e) {
                         e.printStackTrace();
